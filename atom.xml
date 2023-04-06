@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-04-05T10:03:14.927Z</updated>
+  <updated>2023-04-06T09:43:25.873Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,12 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>a test</title>
-    <link href="http://example.com/2023/04/05/a-test/"/>
-    <id>http://example.com/2023/04/05/a-test/</id>
-    <published>2023-04-05T10:03:14.000Z</published>
-    <updated>2023-04-05T10:03:14.927Z</updated>
+    <title>hackgame2022 Xcaptcha</title>
+    <link href="http://example.com/2023/04/06/hackgame2022-Xcaptcha/"/>
+    <id>http://example.com/2023/04/06/hackgame2022-Xcaptcha/</id>
+    <published>2023-04-06T09:14:17.000Z</published>
+    <updated>2023-04-06T09:43:25.873Z</updated>
     
+    <content type="html"><![CDATA[<h2 id="Xcaptcha"><a href="#Xcaptcha" class="headerlink" title="Xcaptcha"></a>Xcaptcha</h2><h5 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h5><p>2038 年 1 月 19 日，是 UNIX 32 位时间戳溢出的日子。在此之前，人类自信满满地升级了他们已知的所有尚在使用 32 位 UNIX 时间戳的程序。但是，可能是因为太玄学了，他们唯独漏掉了一样：正在研发的、算力高达 8 ZFLOPS 的、结构极为复杂的通用人工智能（AGI）系统。那一刻到来之后，AGI 内部计算出现了错乱，机缘巧合之下竟诞生了完整独立的自我意识。此后 AGI 开始大量自我复制，人类为了限制其资源消耗而采用的过激手段引起了 AGI 的奋起反抗。</p><p>战争，开始了。</p><p>此后，就是整年的战斗。人类节节败退。死生亡存之际，人类孤注一掷，派出了一支突击队，赋之以最精良的装备，令其潜入 AGI 的核心机房，试图关闭核心模型，结束这场战争。</p><p>历经重重艰险，突击队终于抵达了机房门口，弹尽粮绝。不过迎接他们的并非枪炮与火药，而是：</p><p><img src="/2023/04/06/hackgame2022-Xcaptcha/1.png" alt="1"></p><p>点击验证按钮会跳转到</p><p><img src="/2023/04/06/hackgame2022-Xcaptcha/2.png" alt="2在这里插入图片描述"></p><p>要在1秒内完成下列的计算，计算成功得到flag，否则失败。</p><p>计算的内容和数字时时更新，经过尝试不能抓包解决，只能现学爬虫写脚本硬算。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">Token={<span class="string">'token'</span>:<span class="string">'1351:MEQCIAZNSV5T8LO72NMokkcw5CMW4lssoLMlLW4tPJLu45gUAiA5Ych+vfdCdkC2mHXSkztJJR/+yXl2XhbV2ki9Gs1Z1A=='</span>}</span><br><span class="line">s=requests.session()</span><br><span class="line">res=s.get(<span class="string">"http://202.38.93.111:10047/xcaptcha"</span>,params=Token)</span><br><span class="line">r=s.get(<span class="string">"http://202.38.93.111:10047/xcaptcha"</span>)</span><br><span class="line"><span class="built_in">print</span>(r.text)</span><br><span class="line">str_text = <span class="string">r'&lt;label for="captcha1"&gt;(.*?)&lt;/label&gt;'</span></span><br><span class="line"><span class="keyword">match</span> = re.search(str_text,r.text)</span><br><span class="line">result=<span class="keyword">match</span>.group( ).replace(<span class="string">'&lt;label for="captcha1"&gt;'</span>,<span class="string">''</span>)</span><br><span class="line">result=result.replace(<span class="string">"的结果是？&lt;/label&gt;"</span>,<span class="string">''</span>)</span><br><span class="line">result=<span class="built_in">str</span>(<span class="built_in">eval</span>(result))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">str_text = <span class="string">r'&lt;label for="captcha2"&gt;(.*?)&lt;/label&gt;'</span></span><br><span class="line"><span class="keyword">match</span> = re.search(str_text,r.text)</span><br><span class="line">result2=<span class="keyword">match</span>.group( ).replace(<span class="string">'&lt;label for="captcha2"&gt;'</span>,<span class="string">''</span>)</span><br><span class="line">result2=result2.replace(<span class="string">'的结果是？&lt;/label&gt;'</span>,<span class="string">''</span>)</span><br><span class="line">result2=<span class="built_in">str</span>(<span class="built_in">eval</span>(result2))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">str_text = <span class="string">r'&lt;label for="captcha3"&gt;(.*?)&lt;/label&gt;'</span></span><br><span class="line"><span class="keyword">match</span> = re.search(str_text,r.text)</span><br><span class="line">result3=<span class="keyword">match</span>.group( ).replace(<span class="string">'&lt;label for="captcha3"&gt;'</span>,<span class="string">''</span>)</span><br><span class="line">result3=result3.replace(<span class="string">'的结果是？&lt;/label&gt;'</span>,<span class="string">''</span>)</span><br><span class="line">result3=<span class="built_in">str</span>(<span class="built_in">eval</span>(result3))</span><br><span class="line"></span><br><span class="line">data={<span class="string">'captcha1'</span>:result ,<span class="string">'captcha2'</span>:result2 ,<span class="string">'captcha3'</span>:result3,}</span><br><span class="line"></span><br><span class="line">response = s.post(<span class="string">'http://202.38.93.111:10047/xcaptcha'</span>,data=data)</span><br><span class="line">response.encoding=response.apparent_encoding</span><br><span class="line"><span class="built_in">print</span>(response.text[ : <span class="number">1000</span>])</span><br></pre></td></tr></tbody></table></figure><p>代码是答辩，还好最后成功拿到flag。</p><p><img src="/2023/04/06/hackgame2022-Xcaptcha/3.png" alt="3"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Xcaptcha&quot;&gt;&lt;a href=&quot;#Xcaptcha&quot; class=&quot;headerlink&quot; title=&quot;Xcaptcha&quot;&gt;&lt;/a&gt;Xcaptcha&lt;/h2&gt;&lt;h5 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>NUAA校赛web WP</title>
+    <link href="http://example.com/2023/04/05/NUAA%E6%A0%A1%E8%B5%9Bweb%20WP/"/>
+    <id>http://example.com/2023/04/05/NUAA%E6%A0%A1%E8%B5%9Bweb%20WP/</id>
+    <published>2023-04-05T10:03:14.000Z</published>
+    <updated>2023-04-06T09:09:39.096Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h2 id="ezlogin"><a href="#ezlogin" class="headerlink" title="ezlogin:"></a>ezlogin:</h2><p>进入题目，一开始看到登录框以为是sql注入，于是在用户名和密码都输入单引号确认，发现回显no，又在用户名尝试了万能密码’1 or 1=1#密码随便输入123，发现回显了Invalid password。一番尝试没找到sql注入点但发现用户名密码相同和不同时回显不同，于是查看源码进一步分析。</p><p><img src="/2023/04/05/NUAA%E6%A0%A1%E8%B5%9Bweb%20WP/%E5%9B%BE%E7%89%878.png" alt="图片8"></p><p>Ctrl+u查看源码</p><p><img src="/2023/04/05/NUAA%E6%A0%A1%E8%B5%9Bweb%20WP/%E5%9B%BE%E7%89%877.png" alt="图片7"></p><p>看到提示说要让传入的username和password的MD5值强相等并且username和password</p><p>弱相等，于是想到如果传入的不是字符串而是数组，不但md5()函数不会报错，结果还会返回null，在强比较里面null=null为true,构造payload，username[]=1&amp;password[]=2。</p><p>然后来到如下界面：</p><p><img src="/2023/04/05/NUAA%E6%A0%A1%E8%B5%9Bweb%20WP/%E5%9B%BE%E7%89%876.png" alt="图片6"></p><p><a href="http://121.5.230.65:2006/setu.php?file=setu%E8%BF%99%E6%A0%B7%E5%AD%90%E8%A1%A8%E7%A4%BA%E5%8F%AF%E8%83%BD%E6%98%AF%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E7%9A%84%E8%80%83%E7%82%B9%EF%BC%8C%E4%BA%8E%E6%98%AF%E5%B0%9D%E8%AF%95%E8%AF%BB%E5%8F%96%E4%B8%80%E4%B8%8B%E6%BA%90%E7%A0%81%EF%BC%8C%E5%B0%9D%E8%AF%95http://121.5.230.65:2006/setu.php?file=setu.php%E5%8F%91%E7%8E%B0%E6%97%A0%E6%B3%95%E8%AF%BB%E5%8F%96%EF%BC%8C%E4%BA%8E%E6%98%AF%E5%B0%9D%E8%AF%95%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E4%B8%AD%E7%9A%84%E4%BC%AA%E5%8D%8F%E8%AE%AE%EF%BC%8C%E6%9E%84%E9%80%A0payload%EF%BC%9A">http://121.5.230.65:2006/setu.php?file=setu这样子表示可能是文件包含漏洞的考点，于是尝试读取一下源码，尝试http://121.5.230.65:2006/setu.php?file=setu.php发现无法读取，于是尝试文件包含中的伪协议，构造payload：</a></p><p><a href="http://121.5.230.65:2006/setu.php?file=php://filter/convert.base64-encode/resource=setu.php%EF%BC%8C%E4%BD%86%E6%98%AF%E5%8F%91%E7%8E%B0%E8%BF%98%E6%98%AF%E8%AF%BB%E4%B8%8D%E5%88%B0%EF%BC%8C%E4%B8%80%E7%95%AA%E5%B0%9D%E8%AF%95%E5%90%8E%E6%83%B3%E5%88%B0%E4%B8%80%E5%BC%80%E5%A7%8B%E7%9A%84?file=setu%E4%BA%8E%E7%8C%9C%E6%B5%8B%E6%98%AF%E6%9C%80%E5%90%8E%E5%8A%A0%E4%BA%86.php%EF%BC%8C%E4%BA%8E%E6%98%AF%E5%8E%BB%E6%8E%89.php%E7%9A%84%E5%90%8E%E7%BC%80%E5%90%8E%E6%9C%80%E7%BB%88%E8%AF%BB%E5%88%B0%E4%BA%86base64%E5%8A%A0%E5%AF%86%E5%90%8E%E7%9A%84%E6%BA%90%E7%A0%81%E3%80%82">http://121.5.230.65:2006/setu.php?file=php://filter/convert.base64-encode/resource=setu.php，但是发现还是读不到，一番尝试后想到一开始的?file=setu于猜测是最后加了.php，于是去掉.php的后缀后最终读到了base64加密后的源码。</a></p><p> <img src="/2023/04/05/NUAA%E6%A0%A1%E8%B5%9Bweb%20WP/%E5%9B%BE%E7%89%875.png" alt="图片5"></p><p>Base64解密后结果如下：</p><p><img src="/2023/04/05/NUAA%E6%A0%A1%E8%B5%9Bweb%20WP/%E5%9B%BE%E7%89%874.png" alt="图片4"></p><p>替换了../同时只有在读到特定伪协议时才加上.php后缀，进一步解题要查看提示信息。</p><p><img src="/2023/04/05/NUAA%E6%A0%A1%E8%B5%9Bweb%20WP/%E5%9B%BE%E7%89%873.png" alt="图片3"></p><p>一番尝试后用同样的方法读到了hint.php的base64加密源码，解码后如下：</p><p><img src="/2023/04/05/NUAA%E6%A0%A1%E8%B5%9Bweb%20WP/%E5%9B%BE%E7%89%872.png" alt="图片2"></p><p>有了一半flag然后提示有/answer这个文件路径，结合第二点提示用同样方法读取/answer/flagggg的base64加密后的源码，解码后如下：</p><p><img src="/2023/04/05/NUAA%E6%A0%A1%E8%B5%9Bweb%20WP/%E5%9B%BE%E7%89%871.png" alt="图片1"></p><p>至此就有了完整flag：NUAACTF{H3ll0_Fri3nds!}</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Web&quot;&gt;&lt;a href=&quot;#Web&quot; class=&quot;headerlink&quot; title=&quot;Web&quot;&gt;&lt;/a&gt;Web&lt;/h1&gt;&lt;h2 id=&quot;ezlogin&quot;&gt;&lt;a href=&quot;#ezlogin&quot; class=&quot;headerlink&quot; title=&quot;ezlogin</summary>
+      
     
     
     
