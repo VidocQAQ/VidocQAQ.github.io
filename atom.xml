@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Vidocq&#39;s Blog</title>
   
-  
+  <subtitle>路逢知己去难留，劲歌热舞赠君别</subtitle>
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
